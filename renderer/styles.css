@@ -1,0 +1,155 @@
+:root {
+    --bg-color: rgba(30, 30, 30, 0.85);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.5);
+    --item-hover: rgba(255, 255, 255, 0.08);
+    --item-selected: rgba(255, 255, 255, 0.15);
+    --accent-color: #007aff;
+}
+
+body {
+    background-color: transparent;
+    color: var(--text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    -webkit-app-region: drag;
+    overflow: hidden;
+    border: 1px solid transparent;
+
+    /* Animation state */
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 150ms ease-out, transform 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out;
+}
+
+body.visible {
+    opacity: 1;
+    transform: scale(1);
+    background-color: var(--bg-color);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--border-color);
+}
+
+body.hiding {
+    opacity: 0;
+    transform: scale(0.98);
+    background-color: transparent;
+    backdrop-filter: none;
+    border: 1px solid transparent;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.tabs-container {
+    display: flex;
+    padding: 12px 12px 8px;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-color);
+    -webkit-app-region: no-drag;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 8px 4px;
+    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.tab-btn.active {
+    background: var(--accent-color);
+    color: white;
+}
+
+#clipboard-list {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    flex-grow: 1;
+    overflow-y: auto;
+    -webkit-app-region: no-drag;
+}
+
+#clipboard-list::-webkit-scrollbar {
+    width: 6px;
+}
+#clipboard-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.clipboard-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-size: 13px;
+    line-height: 1.4;
+    position: relative;
+    gap: 12px;
+}
+
+.item-text {
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+.item-star {
+    font-size: 16px;
+    opacity: 0.3;
+    transition: all 0.2s;
+    cursor: pointer;
+    padding: 4px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.item-star:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.item-star.active {
+    opacity: 1;
+    color: #ffcc00;
+}
+
+.clipboard-item:hover {
+    background: var(--item-hover);
+}
+
+.clipboard-item.selected {
+    background: var(--item-selected);
+}

@@ -1,0 +1,41 @@
+{
+  "name": "d2c",
+  "productName": "D2C",
+  "version": "1.0.0",
+  "description": "D2C Clipboard Manager",
+  "main": "main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --mac"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "build": {
+    "appId": "com.d2c.clipboard",
+    "productName": "D2C",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["universal"]
+        }
+      ]
+    },
+    "files": [
+      "main/**/*",
+      "preload/**/*",
+      "renderer/**/*",
+      "package.json"
+    ]
+  },
+  "dependencies": {
+    "robotjs": "^0.7.0"
+  },
+  "devDependencies": {
+    "electron": "^41.0.4",
+    "electron-builder": "^26.8.1"
+  }
+}

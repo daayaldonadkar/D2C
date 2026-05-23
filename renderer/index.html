@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Clipboard Manager</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div class="tabs-container">
+            <button class="tab-btn active" data-tab="recent">🕒 Recent</button>
+            <button class="tab-btn" data-tab="bookmarked">⭐ Bookmarked</button>
+            <button class="tab-btn" data-tab="top">🔥 Top</button>
+        </div>
+        <ul id="clipboard-list">
+            <!-- Items will be dynamically injected here -->
+        </ul>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+</html>
