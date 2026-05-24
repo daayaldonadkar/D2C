@@ -1,4 +1,4 @@
-const { BrowserWindow } = require('electron');
+const { BrowserWindow, screen } = require('electron');
 const path = require('path');
 
 let mainWindow = null;
@@ -27,6 +27,9 @@ function createMainWindow() {
   // Open the DevTools automatically for debugging
   // mainWindow.webContents.openDevTools({ mode: 'detach' });
 
+  // Make window available on every macOS Space/desktop
+  mainWindow.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
@@ -35,9 +38,18 @@ function createMainWindow() {
 function showWindow() {
   console.log('[WindowManager] showWindow called, mainWindow:', mainWindow ? 'exists' : 'null');
   if (mainWindow) {
+    // Position window at center of the screen the cursor is on
+    const cursorPoint = screen.getCursorScreenPoint();
+    const currentDisplay = screen.getDisplayNearestPoint(cursorPoint);
+    const { x, y, width, height } = currentDisplay.workArea;
+    mainWindow.setBounds({
+      x: Math.round(x + (width - 500) / 2),
+      y: Math.round(y + (height - 400) / 2),
+      width: 500,
+      height: 400
+    });
     mainWindow.show();
     mainWindow.focus();
-    mainWindow.center();
     console.log('[WindowManager] Window shown and focused');
   }
 }
